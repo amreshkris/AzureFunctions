@@ -13,17 +13,21 @@ namespace bdotnet
 {
     public static class GetTasks
     {
+        //Input Binding - Read data from the database
+        //Select the task that matches with the given id 
         [FunctionName("GetTasks")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] 
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "GetTasks")] 
             HttpRequest req,
             ILogger log,
-            [Sql(@"  select Id, [order], title, url, completed from dbo.ToDo
+            [Sql(@"  select Id, [order], title, url, completed from dbo.Tasks
                      where @Id = Id", CommandType = System.Data.CommandType.Text,
-                    Parameters = "@Id={Query.id}", 
-                    ConnectionStringSetting = "SqlConnectionString")] IAsyncEnumerable<ToDoTask> toDos)
+                    Parameters = "@Id={Query.id}",
+                    ConnectionStringSetting = "SqlConnectionString")] 
+                    IAsyncEnumerable<Task> tasks)
         {
-            return await Task.FromResult(new OkObjectResult(toDos));
+            return await System.Threading.Tasks.Task.FromResult
+            (new OkObjectResult(tasks));
         }
     }
 }

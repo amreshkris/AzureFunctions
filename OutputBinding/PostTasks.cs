@@ -13,28 +13,30 @@ namespace bdotnet
 {
     public static class PostTasks
     {
+        //Output Binding - Create/Write new task in the database
+        
         [FunctionName("PostTasks")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous,"post", Route = "PostTasks")] HttpRequest req,
             ILogger log,
-            [Sql("dbo.ToDo",ConnectionStringSetting = "SqlConnectionString")] 
-                IAsyncCollector<ToDoTask> toDoItems)
+            [Sql("dbo.Tasks",ConnectionStringSetting = "SqlConnectionString")] 
+                IAsyncCollector<Task> toDoItems)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            ToDoTask todoTask = JsonConvert.DeserializeObject<ToDoTask>(requestBody);
+            Task todoTask = JsonConvert.DeserializeObject<Task>(requestBody);
 
             todoTask.Id = Guid.NewGuid();
-            todoTask.url =  Environment.GetEnvironmentVariable("ToDoUri")+"?id="+todoTask.Id.ToString();
-            if (todoTask.completed == null)
+            todoTask.Url =  Environment.GetEnvironmentVariable("ToDoUri")+"?id="+todoTask.Id.ToString();
+            if (todoTask.Completed == null)
             {
-                todoTask.completed = false;
+                todoTask.Completed = false;
             }
             await toDoItems.AddAsync(todoTask);
             await toDoItems.FlushAsync();
-            var toDoItemList = new List<ToDoTask> { todoTask };
-            return new OkObjectResult(toDoItemList);
+            
+            return new OkObjectResult(todoTask);
         }
     }
 }
