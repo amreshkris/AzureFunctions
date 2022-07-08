@@ -43,6 +43,10 @@ jobs:
          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
          dotnet build --configuration Release --output ./output
          popd
+	 
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CRED }}
 		 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
