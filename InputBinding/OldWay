@@ -1,0 +1,28 @@
+//  [FunctionName("GetTaskById")]  
+//         public static IActionResult GetTaskById(  
+//         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "task/{id}")] HttpRequest req, ILogger log, int id)  
+//         {  
+//             DataTable dt = new DataTable();  
+//             try  
+//             {  
+//                 using (SqlConnection connection = new SqlConnection(Environment.GetEnvironmentVariable("SqlConnectionString")))  
+//                 {  
+//                     connection.Open();  
+//                     var query = @"Select * from TaskList Where Id = @Id";  
+//                     SqlCommand command = new SqlCommand(query, connection);  
+//                     command.Parameters.AddWithValue("@Id", id);  
+//                     SqlDataAdapter da = new SqlDataAdapter(command);  
+//                     da.Fill(dt);  
+//                 }  
+//             }  
+//             catch (Exception e)  
+//             {  
+//                 log.LogError(e.ToString());  
+//             }  
+//             if (dt.Rows.Count == 0)  
+//             {  
+//                 return new NotFoundResult();  
+//             }  
+//             return new OkObjectResult(dt);  
+//         }  
+  

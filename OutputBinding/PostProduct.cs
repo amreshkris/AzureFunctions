@@ -21,7 +21,7 @@ namespace bdotnet
 
         [FunctionName("PostProduct")]
 
-        [OpenApiOperation(operationId: "Run", tags: new[] { "Post Product" })]
+        [OpenApiOperation(operationId: "Run", tags: new[] { "PostProduct" })]
         [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(List<Product>), Description = "Product to be created", Required = true)]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/json", bodyType: typeof(string), Description = "The OK response")]
 

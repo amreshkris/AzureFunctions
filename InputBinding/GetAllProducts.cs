@@ -12,7 +12,7 @@ namespace Company.Function
     {      
         [FunctionName("GetProducts")]
         public static IActionResult Run(
-                [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
+                [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "GetAllProducts")] HttpRequest req,
                 [Sql("SELECT * FROM [dbo].[Products]",
             CommandType = System.Data.CommandType.Text,
             ConnectionStringSetting = "SqlConnectionString")] IEnumerable<Object> result,

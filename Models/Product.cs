@@ -1,11 +1,13 @@
 using System;
+using System.Text.Json.Serialization;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 
 namespace AzureFunctions.Models
 {
     public class Product
     {
-        [OpenApiProperty(Description = "Id", Nullable = true)]
+        //[OpenApiProperty(Description = "Id", Nullable = true)]
+        [JsonIgnore]
         public Guid Id { get; set; }
 
         public string Name { get; set; }

@@ -20,14 +20,14 @@ namespace bdotnet
         //Output Binding
         [FunctionName("UpdateProduct")]
 
-        [OpenApiOperation(operationId: "Run", tags: new[] { "Update Product" })]
+        [OpenApiOperation(operationId: "Run", tags: new[] { "UpdateProduct" })]
         [OpenApiParameter(name: "id", In = ParameterLocation.Query, Required = true, Type = typeof(Guid), Description = "The id parameter")]
         [OpenApiParameter(name: "name", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The Name to update")]
-        [OpenApiParameter(name: "updatedprice", In = ParameterLocation.Query, Required = false, Type = typeof(bool), Description = "Updated Price")]
+        [OpenApiParameter(name: "updatedprice", In = ParameterLocation.Query, Required = false, Type = typeof(decimal), Description = "Updated Price")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/json", bodyType: typeof(string), Description = "The OK response")]
 
          public static IActionResult Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "Update Product")]        
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "UpdateProduct")]        
             HttpRequest req,
             [Sql("dbo.Products",ConnectionStringSetting = "SqlConnectionString")] 
             out Product product)
