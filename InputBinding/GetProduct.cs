@@ -26,18 +26,21 @@ namespace AzureFunctions.InputBinding
         [OpenApiParameter(name: "id", In = ParameterLocation.Query, Required = true, Type = typeof(Guid), Description = "The id parameter")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/json", bodyType: typeof(string), Description = "The OK response")]
 
-        public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "GetProduct")]
-            HttpRequest req,
+        public static  IActionResult Run(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "GetProduct/{id:guid?}")] HttpRequest req,           
             ILogger log,
-            [Sql(@"  select * from dbo.Products
-                     where @Id = Id", CommandType = System.Data.CommandType.Text,
-                    Parameters = "@Id={Query.id}",
-                    ConnectionStringSetting = "SqlConnectionString")]
-                    IAsyncEnumerable<Product> products)
+            [Sql(@"                    
+                    IF (@id IS NULL or @id='')
+                        select Top(100) * from Products
+                    ELSE
+                        select * from Products where Id = @Id
+                 ",                     
+                CommandType = System.Data.CommandType.Text,
+                Parameters = "@id={id}",
+                ConnectionStringSetting = "SqlConnectionString")]
+                IEnumerable<Product> products)
         {
-            return await System.Threading.Tasks.Task.FromResult
-            (new OkObjectResult(products));
+           return new OkObjectResult(products);
         }
     }
 }

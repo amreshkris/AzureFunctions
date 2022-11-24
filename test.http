@@ -1,0 +1,16 @@
+http://localhost:7071/api/GetProduct/7051b013-e97a-4dac-8ef1-19a2032b46bc
+
+
+###
+
+POST http://localhost:7071/api/UpdateProducts
+content-type: application/json
+
+{
+    "Id":"06ab77b4-d518-43e3-a51d-52c5e2eb7c70",
+    "Name":"Pastel-Color",
+    "Number":"5",
+    "CategoryId":"1",
+    "Price":"20",
+    "UpdatedPrice":"33"
+}
