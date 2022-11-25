@@ -12,5 +12,5 @@ content-type: application/json
     "Number":"5",
     "CategoryId":"1",
     "Price":"20",
-    "UpdatedPrice":"33"
+    "UpdatedPrice":"35"
 }

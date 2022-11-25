@@ -13,7 +13,7 @@ using Microsoft.OpenApi.Models;
 using System.Net;
 using AzureFunctions.Models;
 
-namespace bdotnet
+namespace AzureFunctions.OutputBinding
 {
     public static class PostTasks
     {

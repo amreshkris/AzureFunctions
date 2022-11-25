@@ -1,15 +1,12 @@
-using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.OpenApi.Models;
 using System.Net;
-using bdotnet;
 using AzureFunctions.Models;
 
 namespace AzureFunctions.InputBinding
