@@ -152,5 +152,11 @@
     "**/.cr/": true,
     "**/__pycache__/": true,
     "**/*.pyc": true
+  },
+  "workbench.colorTheme": "Default Light+",
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#4E0269",
+    "titleBar.activeBackground": "#6D0392",
+    "titleBar.activeForeground": "#FEFAFF"
   }
 }

@@ -15,18 +15,19 @@ using AzureFunctions.Models;
 
 namespace AzureFunctions.OutputBinding
 {
-    public static class PostTasks
+    public static class CreateProducts
     {
         //Output Binding - Create/Write new task in the database
 
-        [FunctionName("PostProduct")]
+        [FunctionName("CreateProducts")]
 
-        [OpenApiOperation(operationId: "Run", tags: new[] { "PostProduct" })]
+        [OpenApiOperation(operationId: "Run", tags: new[] { "CreateProducts" })]
         [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(List<Product>), Description = "Product to be created", Required = true)]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/json", bodyType: typeof(string), Description = "The OK response")]
 
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "PostProduct")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "CreateProducts")] 
+            HttpRequest req,
             ILogger log,
             [Sql("dbo.Products",ConnectionStringSetting = "SqlConnectionString")]
                 IAsyncCollector<Product> products)
@@ -38,12 +39,13 @@ namespace AzureFunctions.OutputBinding
 
             foreach (var product in inputProducts)
             {
-                //Add custom logic               
+                //Add custom logic       
+                if(product.Id == null || product.Id == Guid.Empty)
+                    product.Id = Guid.NewGuid();        
                 await products.AddAsync(product);
-                await products.FlushAsync();
+                
             }
-
-
+            await products.FlushAsync();
             return new OkObjectResult(products);
         }
     }

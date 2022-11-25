@@ -1,0 +1,46 @@
+#Create Product(s) REPL
+POST http://localhost:7071/api/CreateProducts
+content-type: application/json
+
+[
+    {       
+        "Name":"Pastel-Color-Small",
+        "Number":"5",
+        "CategoryId":"1",
+        "Price":"20",
+        "UpdatedPrice":"35"
+    },
+    {       
+        "Name":"Pastel-Color-Large",
+        "Number":"5",
+        "CategoryId":"1",
+        "Price":"20",
+        "UpdatedPrice":"35"
+    }
+]
+
+
+###
+#Update Product REPL
+POST http://localhost:7071/api/UpdateProducts
+content-type: application/json
+
+{
+    "Id":"06ab77b4-d518-43e3-a51d-52c5e2eb7c70",
+    "Name":"Pastel-Color",
+    "Number":"5",
+    "CategoryId":"1",
+    "Price":"20",
+    "UpdatedPrice":"37"
+}
+
+
+###
+#Get Product REPL
+http://localhost:7071/api/GetProduct/f5dd0eb7-bb96-4a18-af7e-12ab7eb1b665
+
+
+###
+#Delete Product REPL
+DELETE http://localhost:7071/api/DeleteProduct?id=06ab77b4-d518-43e3-a51d-52c5e2eb7c70
+

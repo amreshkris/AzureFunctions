@@ -23,7 +23,8 @@ namespace AzureFunctions.InputBinding
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/json", bodyType: typeof(string), Description = "The OK response")]
 
         public static  IActionResult Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "GetProduct/{id:guid?}")] HttpRequest req,           
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "GetProduct/{id:guid?}")] 
+             HttpRequest req,           
             ILogger log,
             [Sql(@"                    
                     IF (@id IS NULL or @id='')
